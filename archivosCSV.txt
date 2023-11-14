@@ -1,0 +1,66 @@
+archivosCSV
+
+# Datos iniciales. Entradas es una lista que contiene listas.
+Entradas=[
+ ['correo','nombre','telefono'],
+ ['juan@gmail.com','Juan','8123232323'],
+ ['maria@gmail.com','Maria','5545454545'],
+ ['diana@homail.com','Diana','4490909090']
+]
+for e in Entradas:
+ print(f'{e[0]}|{e[1]}|{e[2]}')
+
+Pasando de una lista de datos a un CSV
+# Se imprime el contenido de la lista, para cotejar.
+print(">> Contenido de la lista.\n")
+print(Entradas)
+# Revisa si existe el CSV, en cuyo caso, si existe el BAK lo elimina
+# y renombra el CSV como BAK
+if os.path.exists("agenda.csv"):
+ if (os.path.exists("agenda.bak")):
+ os.remove("agenda.bak") 
+ os.rename("agenda.csv","agenda.bak")
+# Se escribe el contenido de la lista, usando with y F-String
+with open("agenda.csv","w+") as f:
+ for e in Entradas:
+ f.write(f"{e[0]}|{e[1]}|{e[2]}\n")
+# Se revisa el contenido del archivo.
+print("\n>> Contenido del archivo.\n")
+with open("agenda.csv") as f:
+ print(f.read())
+
+Entradas=[
+ ['correo','nombre','telefono'],
+ ['juan@gmail.com','Juan','8123232323'],
+ ['maria@gmail.com','Maria','5545454545'],
+ ['diana@homail.com','Diana','4490909090']
+]
+with open("agenda.csv","w+") as f:
+ for e in Entradas:
+ f.write(f"{e[0]}|{e[1]}|{e[2]}\n")
+
+# Se crea una lista vacía.
+Datos=[]
+# Se lee el archivo de forma secuencial, y se agregan los elementos
+# a la lista.
+with open("agenda.csv","r") as f:
+ # Se lee secuencialmente el archivo de texto.
+ for linea in f:
+ # Se toma el texto de la línea leída, y se divide tomando como separador
+ # el caracter pipe. La función retorna una lista, donde cada parte del
+ # texto es un elemento.
+ lista=linea.split("|")
+ # El último elemento contiene \n como salto de linea. Se remplaza por nada.
+ lista[2]=lista[2].replace("\n","")
+ Datos.append(lista)
+ 
+# Se revisa el contenido de la lista
+print(">> Contenido de la nueva lista.\n")
+print(Datos)
+
+Datos=[]
+with open("agenda.csv","r+") as f:
+ for linea in f:
+ lista=linea.split("|")
+ lista[2]=lista[2].replace("\n","")
+ Datos.append(lista)

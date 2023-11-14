@@ -1,0 +1,49 @@
+Trabajorutas
+#Se hablilita el trabajo con el sistema operativo
+import os
+# Obtener la ruta de trabajo actual
+# (Current Working Directory)
+ruta=os.getcwd()
+print(ruta)
+# Obtiene el valor absoluto de la ruta
+ruta_absoluta=os.path.abspath(ruta)
+print(ruta_absoluta)
+
+Verificación de existencia de archivos
+#Se asume que el archivo colores.txt no existe en el
+# directorio de trabajo.
+archivo="colores.txt"
+# Informa si el archivo existe o no existe.
+if os.path.exists(archivo):
+ print("\nEl archivo ya existe")
+else:
+ print("\nEl archivo no existe")
+
+Eliminación de archivo
+#Si el archivo existe, lo borra
+archivo="colores.txt"
+# Si el archivo existe, lo elimina.
+# Informa qué se hizo.
+if os.path.exists(archivo):
+ os.remove(archivo)
+ print("\nEl archivo se eliminó")
+else:
+ print("\nEl archivo no existe. No se eliminó nada.")
+
+Creación de archivos de texto plano
+#Se abre un archivo en modo Append Extended (a+). Si el archivo no
+# existe, lo crea, con capacidad de lectura y escrituta. El
+# apuntador de escritura se coloca al final del archivo.
+archivo="colores.txt"
+f = open(archivo,"a+")
+# Verificación de que ya se creo.
+if os.path.exists(archivo):
+ print("\nEl archivo ya existe")
+else:
+ print("\nEl archivo no existe")
+# Se cierra el archivo.
+f.close()
+
+
+
+
